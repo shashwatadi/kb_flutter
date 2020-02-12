@@ -43,8 +43,8 @@ class LandingPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    // MaterialPageRoute(builder: (context) => Signup()),
-                    MaterialPageRoute(builder: (context) => Payment()),
+                    MaterialPageRoute(builder: (context) => Signup()),
+                    // MaterialPageRoute(builder: (context) => Payment()),
                   );
                 },
                 child: Padding(

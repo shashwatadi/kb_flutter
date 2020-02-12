@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 
 import '../Navbar/navbar.dart';
+import '../func/call_truecaller.dart';
 import '../func/create_user.dart';
 import 'payment.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends StatefulWidget {
+  final Map<String, bool> values;
+  final String _class;
+  SignupForm(this.values, this._class);
+
+  _SignupFormState createState() => _SignupFormState(values, _class);
+}
+
+class _SignupFormState extends State<SignupForm> {
   final Map<String, bool> values;
   final String _class;
 
-  SignupForm(this.values, this._class);
+  _SignupFormState(this.values, this._class);
   String email, password;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void submit(context) {
     final form = _formKey.currentState;

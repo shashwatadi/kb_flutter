@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
+import '../Screens/dashboard.dart';
+import '../model/globals.dart';
 import '../model/navigation_model.dart';
 import '../theme.dart';
 import 'collapsing_list_tile.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
+  final Function() notifyParent;
+  CollapsingNavigationDrawer({Key key, this.notifyParent}) : super(key: key);
   @override
   CollapsingNavigationDrawerState createState() {
-    return new CollapsingNavigationDrawerState();
+    return new CollapsingNavigationDrawerState(notifyParent: notifyParent);
   }
 }
 
 class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
     with SingleTickerProviderStateMixin {
+  final Function() notifyParent;
+  CollapsingNavigationDrawerState({this.notifyParent});
   double maxWidth = 210;
   double minWidth = 70;
   bool isCollapsed = false;
   AnimationController _animationController;
   Animation<double> widthAnimation;
-  int currentSelectedIndex = 0;
 
   @override
   void initState() {
@@ -62,9 +68,17 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 itemBuilder: (context, counter) {
                   return CollapsingListTile(
                     onTap: () {
+                      if (currentSelectedIndex != counter) {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) => Dashboard()),
+                        );
+                      }
                       setState(() {
                         currentSelectedIndex = counter;
                       });
+                      // widget.notifyParent;
                     },
                     isSelected: currentSelectedIndex == counter,
                     title: navigationItems[counter].title,
@@ -79,6 +93,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               onTap: () {
                 setState(() {
                   isCollapsed = !isCollapsed;
+
                   isCollapsed
                       ? _animationController.forward()
                       : _animationController.reverse();
