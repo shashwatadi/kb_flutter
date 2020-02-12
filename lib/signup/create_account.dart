@@ -5,7 +5,9 @@ import '../Navbar/navbar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase/firebase.dart';
 import 'package:meta/meta.dart';
+import '../func/fetch_truecaller_data.dart';
 import '../func/call_truecaller.dart';
+
 import '../model/globals.dart';
 import 'signup_form.dart';
 import 'package:http/http.dart' as http;
@@ -123,17 +125,13 @@ class CreateAccount extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(4.0))),
                   onPressed: () async {
                     // callTruecaller();
-                    UserCredential user = await _handleSignIn(context);
-                    Alert(
-                            context: context,
-                            title: "Debug",
-                            desc: getUserPhoneNumber(context))
-                        .show();
+                    // UserCredential user = await _handleSignIn(context);
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
                     //       builder: (context) => SignupForm(values, _class)),
                     // );
+                    fetchTruecallerData();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -152,10 +150,7 @@ class CreateAccount extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4.0))),
                   onPressed: () async {
-                    Alert(context: context, title: "Debug", desc: "user")
-                        .show();
-
-                    // callTruecaller();
+                    callTruecaller();
                     // UserCredential user = await _handleSignIn();
                   },
                   child: Padding(

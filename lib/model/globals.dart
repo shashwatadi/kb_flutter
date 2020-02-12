@@ -5,6 +5,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 int selectedDashboardTab = 0;
 int currentSelectedIndex = 0;
 UserCredential user;
+String trueStr;
 
 getUserPhoneNumber(context) {
   Alert(context: context, title: "Debug", desc: user.user.toString()).show();
